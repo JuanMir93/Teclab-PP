@@ -1,0 +1,29 @@
+     <!-- Modal -->
+     <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title fs-5" id="exampleModalLabel">Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="submitFormulario1()" action="/autenticate" method="POST">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Ingrese su usuario</label>
+                      <input type="text" class="form-control" [class.is-invalid]="usuarioNoValido" formControlName="usuario" id="usuario" aria-describedby="emailHelp">
+                      <small *ngIf="usuarioNoValido" class="nombre text-danger ">Usuario no válido</small>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Ingrese su constraseña</label>
+                      <input type="password" class="form-control" formControlName="password" [class.is-invalid]="passwordNoValido" id="password">
+                      <small *ngIf="passwordNoValido" class="nombre text-danger ">Contraseña no válida</small>
+                    </div>
+                    <button type="submit"  class="btn btn-primary">Ingresar</button>
+                  </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+        </div>
+    </div>

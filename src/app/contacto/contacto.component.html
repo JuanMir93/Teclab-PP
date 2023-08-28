@@ -7,36 +7,40 @@
             <h4>  <i class="bi bi-chat-left-quote"></i> &nbsp; Contacto</h4>
         </div>
         <div class="mb-1">
-            <form id = "contacto" >
+            <form [formGroup]="datos"  id ="contacto">
                 <div class=" mb-4 d-flex "> 
                     <div class="nombre w-100">
-                        <label for="nombre"> <i class="bi bi-person-fill"></i>Nombre</label>
-                        <input type="text" class="nombre form-control" name="nombre" id="nombre" placeholder= " Nombre" required>
-                        <div class="nombre text-danger "></div>
+                        <label for="nombre"> <i class="bi bi-person-fill"></i>Apellido y Nombre</label>
+                        <input type="text" class="nombre form-control" name="nombre" id="nombre" placeholder= "Apellido y nombre" formControlName="nombre" [class.is-invalid] ="nombreNoValido">
+                        <small  *ngIf="nombreNoValido" class="nombre text-danger ">Este campo es requerido con un mínimo de 5 caracteres</small>
                     </div>
-                    <div class="apellido w-100" >
-                        <label for="apellido"> <i class="bi bi-person-bounding-box"></i>Apellido</label>
-                        <input type="text" class="apellido form-control" name="apellido" id="apellido" placeholder= "Apellido" required>
-                        <div class="apellido text-danger"></div>
+                </div>
+                <div class=" mb-4 d-flex "> 
+                    <div class="nombre w-100">
+                        <label for="nombre"> <i class="bi bi-person-fill"></i>Telefono</label>
+                        <input type="number" class="telefono form-control" name="telefono" id="telefono" placeholder= "Telefono/Celular" formControlName="telefono" [class.is-invalid] ="telefonoNoValido">
+                        <small *ngIf="telefonoNoValido" class="nombre text-danger ">Este campo es obligatorio</small>
                     </div>
                 </div>
                 <div class="mb-4">
                     <label for="correo"><i class="bi bi-envelope-fill"></i> Correo</label>
-                    <input type="email" class="form-control" name="correo" id="correo" placeholder= "usuario@email.com" required>
-                    <div class="correo text-danger"></div>
+                    <input type="email" class="form-control" name="correo" id="correo" placeholder= "usuario@email.com" formControlName="correo" [class.is-invalid] ="correoNoValido">
+                    <small *ngIf="correoNoValido"class="correo text-danger">Ingrese un correo válido</small>
                 </div> 
+                <div class=" mb-4 d-flex "> 
+                    <div class="nombre w-100">
+                        <label for="nombre"> <i class="bi bi-person-fill"></i>Asunto</label>
+                        <input type="text" class="asunto form-control" name="asunto" id="asunto" placeholder= "Asunto" formControlName="asunto" [class.is-invalid] ="asuntoNoValido">
+                        <small *ngIf="asuntoNoValido" class="nombre text-danger ">Este campo es obligatorio</small>
+                    </div>
+                </div>
                 <div class="mb-4">
-                    <label for="telefono"><i class="bi bi-envelope-fill"></i>Teléfono/Celular</label>
-                    <input type="number" class="form-control" name="telefono" id="telefono" placeholder= "2974222333" required>
-                    <div class="telefono text-danger"></div>
-                </div> 
-                <div class="mb-4">
-                    <label for="mensaje"> <i class="bi bi-chat-right-dots-fill" required></i> Mensaje</label>
-                    <textarea name="mensaje" id="mensaje" class="form-control" placeholder="Escriba aquí su mensaje"></textarea>
-                    <div class="mensaje text-danger"></div>
+                    <label for="mensaje"> <i class="bi bi-chat-right-dots-fill" ></i> Mensaje</label>
+                    <textarea type="textarea" name="mensaje" id="mensaje" class="form-control" placeholder="Escriba aquí su mensaje" formControlName="mensaje" [class.is-invalid] ="mensajeNoValido"></textarea>
+                    <small *ngIf="mensajeNoValido" class="mensaje text-danger">Este campo es obligatorio</small>
                 </div> 
                 <div class="boton mb-2 d-flex justify-content-center align-items-center ">
-                    <button id ="button" class="boton-enviar btn btn-primary ">
+                    <button id ="button" type="submit" value="enviar"  class="boton-enviar btn btn-primary " (click)="envioCorreo()">
                         <span>Enviar </span><i id="icono" class="bi bi-cursor-fill "></i>
                     </button>
                 </div> 
@@ -45,3 +49,5 @@
         </div>
     </div>
 </section>
+
+<script src="/src/assets/scripts/contactoForm.js"></script>

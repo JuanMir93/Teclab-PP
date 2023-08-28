@@ -1,33 +1,49 @@
 <!-- SECCION NOTICIAS-->
-<div class="noticias">
+<div class="noticias" id="Noticias">
     <h1 class="noticias-titulo display-4">Noticias</h1>
-
+    <div class="container-add">
+        <a class="btnadd" *ngIf="logueado"><i class="fa-solid fa-plus" type="button" data-bs-toggle="modal" data-bs-target="#Modal2" ></i>
+        </a> 
+    </div>
+    <div class="separador"></div>
     <div class="noticias-card card mb-3">
-    
         <div class="card-body">
             <div class="btnx">
+                <button class="btn"><i class="fa-solid fa-pen-to-square"></i></button>
                 <button class="btn"><i class="fa-solid fa-xmark "></i></button>
             </div>
-          <h5 class="card-title">Título de la tarjeta</h5>
-          <p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como introducción natural a contenido adicional. Este contenido es un poco más largo.</p>
+            <img src="./assets/img/Foto 7.jpg" class="card-img-top" alt="...">
+          <h5 class="card-title" >Acto día de la independencia y reconocimiento a jubilados</h5>
+          <p class="card-text" >El 7 de Julio de 2023 se celebró la el día de la independencia y se realizó el reconocimiento a los jubilados de la institución, entre ellos a la segunda directora del establecimiento
+            Sonia Alvarez y a los profesores Tomás Fernandez, Miguel Carrizo, Irma Lacalle, a las preceptoras Juana Lencinas y Patricia Aillapán.
+          </p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
       <div class="card mb-3">
         <div class="card-body">
             <div class="btnx">
+                <button class="btn"><i class="fa-solid fa-pen-to-square"></i></button>
                 <button class="btn"><i class="fa-solid fa-xmark "></i></button>
             </div>
-          <h5 class="card-title">Título de la tarjeta</h5>
-          <p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como introducción natural a contenido adicional. Este contenido es un poco más largo.</p>
+            <!--<img src="./assets/img/Foto 1 esc 743.jpg" class="card-img-top" alt="...">-->
+          <h5 class="card-title">Los estudiantes participan de la Muestra de Emprendimiento!</h5>
+          <p class="card-text"> A partir de la iniciativa de la profesora de Emprendimiento Socio-Productivo.De los trabajoe presentados salió seleccionado un trabajo de estudiantes de 6to 2da OEA.Felicitaciones a Recycled Lights!
+             Recycled Lights,  lámparas personalizadas, realizadas con botellas de plástico, otorgando además de un uso creativo, original y artesanal a los mismos. Su objetivo es reducir el impacto ambiental que provocan estos residuos.
+            Generando y promocionando un lazo amigable con la onda verde.</p>
+          <p class="card-text"><small class="text-muted">Last update 1 week ago</small></p>
         </div>
       </div>
       <div class="card mb-3">
         <div class="card-body">
             <div class="btnx">
+                <button class="btn"><i class="fa-solid fa-pen-to-square"></i></button>
                 <button class="btn"><i class="fa-solid fa-xmark "></i></button>
             </div>
-          <h5 class="card-title">Título de la tarjeta</h5>
-          <p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como introducción natural a contenido adicional. Este contenido es un poco más largo.</p>
+            <img src="./assets/img/foto 4.jpg" class="card-img-top" alt="...">
+          <h5 class="card-title">Proyectos</h5>
+          <p class="card-text">Buen día Comunidad.... Hermosa noticia comunicarles que hemos Sido seleccionados con el proyecto de 6to 2da OEA para la siguiente instancia 🥳🥳🥳🤩🤩🤩🤗🤗🤗</p>
+          <p class="card-text"><small class="text-muted">Last updated 1 month ago</small></p>
         </div>
       </div>
 </div>
