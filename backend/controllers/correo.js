@@ -19,7 +19,7 @@ const envioCorreo = (req=request, res=response) =>{
     const opciones= {
         from:body.correo,
         subject: body.asunto,
-        to: 'hanssturmtwind@gmail.com',
+        to: '',
         text:`correo: ${email}\nasunto: ${asunto}\nnombre: ${nombre}\ntelefono: ${telefono}\nmensaje: ${mensaje}`
     };
 
