@@ -11,8 +11,8 @@ const envioCorreo = (req=request, res=response) =>{
         host: 'smtp.gmail.com',
         post:587,
         auth:{
-                user:'hanssturmtwind@gmail.com',
-                pass: 'fxtthtlwqijehzyg'
+                user:'your email',
+                pass: 'your password'
         }
     });
 
