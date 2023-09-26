@@ -60,13 +60,13 @@ export class LoginComponent implements OnInit {
      // Llamar al método de autenticación en el servicio AuthService
      this.authService.autenticar(loginRequest).subscribe(
       autenticado => {
-        
         if (autenticado) {
           // Si la autenticación es exitosa, redirigir al usuario a la ruta deseada
           this.router.navigate(['/acceso']);
           $("#Modal").modal('hide');
           Notiflix.Notify.success('El usuario ha sido autenticado');
           this.authService.logueado(true);
+          this.recargarPagina();
           } else {
           Notiflix.Notify.failure('Credenciales inválidas'); // Mostrar mensaje de error si las credenciales son inválidas
         }
@@ -91,6 +91,12 @@ export class LoginComponent implements OnInit {
     return this.form.get('password')?.invalid && this.form.get('password')?.touched && this.form.get('password')?.dirty;;
   } 
 
+  recargarPagina() {
+    setTimeout(() => {
+      location.reload();
+    }, 400);
+  }
+  
 }
   
 

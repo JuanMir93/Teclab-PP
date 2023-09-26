@@ -11,15 +11,15 @@ const envioCorreo = (req=request, res=response) =>{
         host: 'smtp.gmail.com',
         post:587,
         auth:{
-                user:'',
-                pass: ''
+                user:'hanssturmtwind@gmail.com',
+                pass: 'fxtthtlwqijehzyg'
         }
     });
 
     const opciones= {
         from:body.correo,
         subject: body.asunto,
-        to: '',
+        to: 'hanssturmtwind@gmail.com',
         text:`correo: ${email}\nasunto: ${asunto}\nnombre: ${nombre}\ntelefono: ${telefono}\nmensaje: ${mensaje}`
     };
 

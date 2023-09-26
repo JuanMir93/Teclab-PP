@@ -19,7 +19,6 @@ export class LoginService {
    loginUser(form:LoginRequest):Observable<ResponseI>{
     let direccion = this.url  + "login";
     return this.http.post<ResponseI>(direccion,form);
-    
    }
    
 }

@@ -1,6 +1,6 @@
 export interface Noticia {
-    id?: string;
-    imagen: string;
-    titulo: string;
+    _id?: string;
+    imagen: String;
+    titulo: String;
     contenido: string;
   }

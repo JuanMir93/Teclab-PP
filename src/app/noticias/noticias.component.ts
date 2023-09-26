@@ -18,8 +18,6 @@ export class NoticiasComponent implements OnInit {
     this.logueado = this.authService.estaAutenticado();
   }
 
-  crear():void {
 
-  }
 
 }

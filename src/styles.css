@@ -34,18 +34,12 @@
     font-size: 1.5rem;
 }
 
-.nav-link.user{
+.nav-link.user,.logout{
     margin-right: 3rem;
     padding: 0;
     color: gray;
 }
 
-.nav-link.logout{
-    margin-right: 5rem;
-    padding: 0;
-    color: gray;
-    
-}
 
 .nav-link:hover{
     color:blue;
@@ -201,10 +195,10 @@
 }
 
 
-.boton .boton-enviar{
-    width: 8vh;
+/*.boton .boton-enviar{
+    width: 4rem;
     height: 50%;
-}
+}*/
 
 
 
@@ -225,7 +219,6 @@ footer .footer1{
 @media (max-width: 412px), ((max-width: 1200px)) { 
 
     .nav-link{
-       
         font-size: 1rem;
     }
 
@@ -295,10 +288,6 @@ footer .footer1{
         width: 35vh;
     }
    
-    .nav-link.logout{
-        margin-top: 3rem;
-        padding: 0;
-        color: gray;
-    }
+    
 }
 

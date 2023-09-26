@@ -7,11 +7,8 @@ import { NoticiaComponent } from './noticia/noticia.component';
 const routes: Routes = [{
   path:'publico',component:AppComponent
 },
-{
-  path:'acceso',component:AppComponent
-},
 { 
-  path:'', redirectTo:'login' , pathMatch: 'full' 
+  path:'', redirectTo:'publico' , pathMatch: 'full' 
 },
 { 
   path:'acceso', component:LoginComponent 

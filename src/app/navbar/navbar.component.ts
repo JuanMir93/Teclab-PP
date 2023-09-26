@@ -9,11 +9,32 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent{
   constructor(private authService: AuthService, private router: Router) {}
-
+  logueado= false;
+  logusuario = false;
   cerrarSesion() {
     // Llama al método de cerrar sesión en el servicio AuthService
     this.authService.cerrarSesion();
-    // Después de cerrar sesión, redirige al contenido público (por ejemplo, la página de inicio)
-    this.router.navigate(['/inicio']); // Cambia '/inicio' por la ruta de la página de inicio o contenido público
+    // Después de cerrar sesión, redirige al contenido público
+    
+    this.router.navigate(['/publico']);
+    this.recargarPagina();
+    
   }
+
+  ngOnInit(): void {
+    this.logueado = this.authService.estaAutenticado();
+    if(!this.authService.estaAutenticado()){
+      this.logusuario=true;
+      
+    };
+  }
+
+  recargarPagina() {
+    location.reload();
+    setTimeout(() => {
+      this.logusuario=true;
+    }, 2000);
+    
+  }
+  
 }

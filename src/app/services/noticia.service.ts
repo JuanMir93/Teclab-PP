@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Noticia } from '../models/noticiaInterface';
-import { NoticiasComponent } from '../noticias/noticias.component';
-import { Global } from './global';
+
 @Injectable({
   providedIn: 'any'
 })
@@ -12,11 +11,13 @@ export class NoticiasService {
 
   constructor(private http: HttpClient) {}
 
-  crearNoticia(nuevaNoticia: Noticia):Observable<Noticia> {
-    // Realizar una solicitud POST al servidor para crear una nueva noticia
-    
-    return this.http.post<Noticia>(this.apiUrl, nuevaNoticia);
-    
+  crearNoticia(imagen: File, titulo: string, contenido: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('imagen', imagen);
+    formData.append('titulo', titulo);
+    formData.append('contenido', contenido);
+  
+    return this.http.post(this.apiUrl, formData);
   }
 
   obtenerNoticias(): Observable<Noticia[]> {
@@ -24,9 +25,25 @@ export class NoticiasService {
     return this.http.get<Noticia[]>(this.apiUrl);
   }
 
-  eliminarNoticia(noticiaId: number): Observable<void> {
+  obtenerNoticia(id: string) {
+    return this.http.get<Noticia>(`${this.apiUrl}/${id}`);
+  }
+
+  eliminarNoticia(id: string) {
     // Realizar una solicitud DELETE al servidor para eliminar una noticia por su ID
-    return this.http.delete<void>(`${this.apiUrl}/${noticiaId}`);
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  modificarNoticia(id: string, imagen: File | null, titulo: string, contenido: string) {
+    const formData = new FormData();
+    formData.append('titulo', titulo);
+    formData.append('contenido', contenido);
+    
+    if (imagen) {
+      formData.append('imagen', imagen, imagen.name);
+    }
+
+    return this.http.put(`${this.apiUrl}/${id}`, formData);
   }
 }
 

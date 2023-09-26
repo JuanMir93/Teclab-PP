@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NoticiasService } from './services/noticia.service';
 import { Routes,RouterModule } from '@angular/router';
+import { ListaNoticiasComponent } from './lista-noticias/lista-noticias.component';
 
 
 
@@ -29,7 +30,8 @@ import { Routes,RouterModule } from '@angular/router';
     NoticiaComponent,
     ContactoComponent,
     FooterComponent,
-    routingComponents
+    routingComponents,
+    ListaNoticiasComponent
     
   ],
   imports: [

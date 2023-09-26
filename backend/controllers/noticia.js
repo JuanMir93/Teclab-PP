@@ -1,105 +1,118 @@
 'use strict'
+const multer = require('multer');
+const multerConfig = require('../../utils/multerConfig');
+
 const Noticia = require('../models/noticia');
 
-var controller = {
-saveNoticia: function(req, res){
-    var noticia = new Noticia();
-    var params = req.body;
-     noticia.imagen = params.imagen;
-     noticia.titulo = params.titulo;
-     noticia.contenido= params.contenido;
-    
-     
-        noticia.save().then((noticiaStored) =>{
-         
-         if(!noticiaStored){
-          return res.status(400).json({
-             message: "No se ha podido guardar la noticia"
-         });
-         }
-         res.status(200).json(noticiaStored);
-         
-     })
+const upload = multer(multerConfig).single('imagen');
 
-     .catch(error => {
-         return res.status(500).json({
-            
-            message: "Error en el servidor"});
-     });
- },
-
- getNoticia: function (req, res){
-     var noticiaId = req.params.id;
-
-     if(noticiaId == null)
-         return res.status(404).send({
-                
-             message: "La noticia no existe"
-          });
-
-     Noticia.findById(noticiaId).then ((noticia) => {
-
-         if(!noticia)
-             return res.status(404).send({       
-              message: "La noticia no existe"
-         });
-
-         res.status(200).send(noticia);
-
-     })
-
-     .catch((error) => {
-         return res.status(500).send({
-             message: "Error al devolver los datos"
-         });
-     });
- },
-
- updateNoticia: function(req,res){
-     var noticiaId = req.params.id;
-     var update = req.body;
-
-     Noticia.findByIdAndUpdate(noticiaId, update, {new:true}).then (( noticiaUpdate)=>{
- 
-         if(!noticiaUpdate) 
-             return res.status(404).send({
-                message: "No existe noticia para actualizar"
-             });
-
-         return res.status(200).send({
-             noticia:noticiaUpdate
-         });
-
-         
-     })
-
-     .catch(error => {
-         return res.status(500).send({
-             message: "Error al devolver los datos"
-         });
-     });
- },
-
- deleteNoticia: function(req,res){
-     var noticiaId = req.params.id;
-
-     Noticia.findByIdAndDelete(noticiaId).then ((noticiaRemoved) =>{
-         if(!noticiaRemoved)
-             return res.status(404).send({
-                 message: "No se encuentra la noticia"
-         });
-
-         return res.status(200).send({
-             noticia:noticiaRemoved
-         })
-     })
-
-     .catch(error => {
-         return res.status(500).send({
-             message: "No se pudo eliminar la noticia"
-         });
-     });
- }
+exports.fileUpload = (req,res,next) =>{
+    upload(req,res, function(error){
+        if (error){
+            console.error("Error en la carga de archivos:", error);
+            return res.status(500).json({ message: 'Error en la carga de archivos' });
+        }
+        return next();
+    });
 };
 
-module.exports= controller
+//agregar noticia
+exports.add= async(req, res) =>{
+    const noticia = new Noticia(req.body);
+
+    try{
+        if (req.file && req.file.filename){
+            noticia.imagen = req.file.filename;
+        }
+        await noticia.save();
+        res.status(200).json({
+            message: 'Nueva noticia agregada'
+        });    
+    }catch (error){
+     if(error.code === 11000){
+       res.status(400).json({
+           message: `Ya existe la noticia con la imagen: ${req.body.imagen}`,
+        });
+    }
+  }
+};
+
+// mostrar la lista de noticias
+exports.list= async(req, res) =>{
+    try{
+    const noticia = await Noticia.find({});
+    res.json(noticia);
+    }catch (error){
+        console.log(error);
+        res.status(504).send;
+        next();
+    }
+};
+
+//Leer noticia 
+exports.show= async(req, res,next) =>{
+    try{
+    const noticia = await Noticia.findOneAndUpdate(req.params.id);
+        if(!noticia){
+            res.status(404).json({
+                message: 'La noticia no existe'
+            });
+    }
+    res.json(noticia);
+    }catch (error){
+        console.log(error);
+        res.status(400).json({
+            message: 'Error al procesar la petición'
+        })
+    }
+};
+
+//Actualizar noticia
+
+exports.update = async (req, res, next) => {
+    try {
+      if (!req.params.id) {
+        return res.status(400).json({
+          message: 'ID de noticia no válido',
+        });
+      }
+  
+      let nuevaNoticia = req.body;
+  
+      if (req.file && req.file.filename) {
+        nuevaNoticia.imagen = req.file.filename;
+      } else {
+        const noticia = await Noticia.findById(req.params.id);
+        nuevaNoticia.imagen = noticia.imagen;
+      }
+  
+      const noticiaActualizada = await Noticia.findByIdAndUpdate(
+        { _id: req.params.id },
+        nuevaNoticia,
+        { new: true }
+      );
+  
+      res.json({
+        message: 'Noticia actualizada correctamente',
+      });
+    } catch (error) {
+      res.status(400).json({
+        message: 'Error al procesar la petición',
+      });
+    }
+  };
+
+//Eliminar noticia
+
+exports.delete= async(req, res,next) =>{
+    try{
+     await Noticia.findOneAndDelete({ _id: req.params.id  });
+        res.json({
+            message: 'La noticia ha sido eliminada'
+        });
+    }catch (error){
+        res.status(400).json({
+            message: 'La noticia no existe'
+        });
+    }
+};

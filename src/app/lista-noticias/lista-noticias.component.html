@@ -1,0 +1,48 @@
+
+<div class="noticias-card card mb-3" *ngFor="let noticia of noticias">
+    <div class="card-body" >
+        <div class="btnx">
+            <button class="btn" *ngIf="logueado"data-bs-toggle="modal" data-bs-target="#Modal3"  ><i class="fa-solid fa-pen-to-square"></i></button>
+            <button class="btn" *ngIf="logueado"  (click)="borrarNoticia(noticia._id!)" ><i class="fa-solid fa-xmark "></i></button>
+        </div>
+        <img [src]="'http://localhost:3700/' + noticia.imagen"  class="img-card-top w-100" alt="">
+      <h5 class="card-title"  required>{{noticia.titulo}}</h5>
+      <p class="card-text" required>
+        {{noticia.contenido}}
+      </p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+</div>
+
+<!--MODAL PARA MODIFICAR LA NOTICIA-->
+
+<div class="modal fade" id="Modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title fs-5" id="exampleModalLabel2">Noticia</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form  (submit)="modificarNoticia(imagen,titulo,contenido)">
+                  <div class="form-group mb-3">
+                      <label for="formFile" class="form-label">Ingrese una imagen</label>
+                      <input class="form-control" type="file" name="imagen"  id="imagen1" #imagen >
+                    </div>
+                  <div class="form-group mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Titulo</label>
+                      <input type="text" class="form-control" name="titulo" id="titulo1" placeholder="titulo" #titulo required>
+                  </div>
+                  <div class="form-group mb-3">
+                      <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
+                      <textarea class="form-control" id="contenido1" name="contenido" rows="3"  #contenido required></textarea>
+                  </div>
+                  <button class="btn btn-primary">Publicar</button>
+            </form>
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+  </div>
+  </div>
+</div>
